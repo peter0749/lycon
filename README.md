@@ -1,5 +1,7 @@
 # Lycon
 
+(This is a modified version to resolve linker issue in original repo)
+
 A minimal and fast image library for Python and C++.
 
 Lycon is a small subset of optimized image operations derived from [OpenCV](http://opencv.org/).
@@ -18,7 +20,20 @@ Tested on:
 ## Install
 
 ```
-pip install lycon
+pip install git+https://github.com/peter0749/lycon
+```
+
+or clone this repo and
+
+```
+python setup.py bdist_wheel
+pip install dist/*.whl
+```
+
+or if you feel locky, you can directly use our prebuilt wheel:
+
+```
+pip install prebuilt_wheels/lycon-0.2.0-cp37-cp37m-linux_x86_64.whl
 ```
 
 Native extension dependencies:

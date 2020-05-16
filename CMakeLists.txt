@@ -1,6 +1,11 @@
 cmake_minimum_required(VERSION 2.8.11)
 
-project(lycon)
+# If you want to use C++11 in your project, you should definitely add the following two lines:
+set(CMAKE_CXX_STANDARD 11)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+
+# Explicitly specify programming language
+project(lycon C CXX)
 
 include(cmake/LyconUtils.cmake)
 
@@ -86,5 +91,6 @@ if (LYCON_BUILD_PYTHON)
   add_library(pycon SHARED ${LYCON_PYTHON_SOURCES})
   target_link_libraries(pycon lycon ${PYTHON_LIB_PATH})
   # NOTE(saumitro): Even on macOS, Python expects the ".so" suffix rather than ".dylib"
-  set_target_properties(pycon PROPERTIES PREFIX "_" SUFFIX ".so" OUTPUT_NAME "lycon")
+  # NOTE(peter0749): To prevent linker issue, we need to add "LINKER_LANGUAGE C"
+  set_target_properties(pycon PROPERTIES PREFIX "_" SUFFIX ".so" OUTPUT_NAME "lycon" LINKER_LANGUAGE C)
 endif()
